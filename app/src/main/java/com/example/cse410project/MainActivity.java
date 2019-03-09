@@ -80,11 +80,11 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         }
-        if (someChecked) {
-            findViewById(R.id.delete).setVisibility(View.VISIBLE);
-        } else {
-            findViewById(R.id.delete).setVisibility(View.INVISIBLE);
-        }
+//        if (someChecked) {
+//            findViewById(R.id.delete).setVisibility(View.VISIBLE);
+//        } else {
+//            findViewById(R.id.delete).setVisibility(View.INVISIBLE);
+//        }
         return true;
     }
 
@@ -143,6 +143,7 @@ public class MainActivity extends AppCompatActivity {
                 if (deleteList.size() > 0) {
                     deleteItems();
                 }
+                return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
