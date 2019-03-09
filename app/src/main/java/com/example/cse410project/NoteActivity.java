@@ -12,8 +12,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 import java.io.File;
@@ -28,6 +30,7 @@ public class NoteActivity extends AppCompatActivity {
     TextView noteTitle;
     TextView noteContents;
     ImageView noteImage;
+    Spinner categoriesSpinner;
 
     SQLiteDatabase db;
 
@@ -42,7 +45,7 @@ public class NoteActivity extends AppCompatActivity {
         NoteTakingDatabase handler = new NoteTakingDatabase(getApplicationContext());
         // Get the writable database
         db = handler.getReadableDatabase();
-
+        initializeSpinner();
         saveNote = (Button) findViewById(R.id.create_note);
         noteTitle = (TextView) findViewById(R.id.note_title);
         noteImage = (ImageView) findViewById(R.id.note_image);
@@ -57,9 +60,9 @@ public class NoteActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (!isUpdate) {
-                    storeNote(imagePath, noteTitle.getText().toString(), noteContents.getText().toString(), "Category");
+                    storeNote(imagePath, noteTitle.getText().toString(), noteContents.getText().toString(), categoriesSpinner.getSelectedItem().toString());
                 } else {
-                    updateNote(noteId, imagePath, noteTitle.getText().toString(), noteContents.getText().toString(), "Category");
+                    updateNote(noteId, imagePath, noteTitle.getText().toString(), noteContents.getText().toString(), categoriesSpinner.getSelectedItem().toString());
                 }
                 finish();
             }
@@ -71,6 +74,13 @@ public class NoteActivity extends AppCompatActivity {
                 EasyImage.openChooserWithGallery(NoteActivity.this, "Upload an Image", 0);
             }
         });
+    }
+
+    private void initializeSpinner() {
+        categoriesSpinner = (Spinner) findViewById(R.id.category_spinner);
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, MainActivity.categories);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        categoriesSpinner.setAdapter(adapter);
     }
 
     @Override

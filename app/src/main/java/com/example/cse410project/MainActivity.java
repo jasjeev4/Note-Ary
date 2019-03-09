@@ -32,6 +32,7 @@ public class MainActivity extends AppCompatActivity {
     ListView noteList;
     NoteAdapter adapter;
     HashSet<Integer> deleteList = new HashSet<>();
+    public static String[] categories = { "General", "To Do" };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,24 +63,24 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public boolean dispatchTouchEvent(MotionEvent event) {
         super.dispatchTouchEvent(event);
-        if (event.getAction() != MotionEvent.ACTION_UP && event.getAction() != MotionEvent.ACTION_DOWN) {
-            return true;
-        }
-        super.onTouchEvent(event);
-        Log.d("F","PISSS");
-        boolean someChecked = false;
-        if (noteList != null) {
-            for (int i = 0; i < noteList.getCount(); ++i) {
-                View v = noteList.getChildAt(i);
-                CheckBox cb = (CheckBox) v.findViewById(R.id.checkbox);
-                if (cb.isChecked()) {
-                    someChecked = true;
-                    deleteList.add(i);
-                } else {
-                    deleteList.remove(i);
-                }
-            }
-        }
+//        if (event.getAction() != MotionEvent.ACTION_UP && event.getAction() != MotionEvent.ACTION_DOWN) {
+//            return true;
+//        }
+//        super.onTouchEvent(event);
+//        Log.d("F","PISSS");
+//        boolean someChecked = false;
+//        if (noteList != null) {
+//            for (int i = 0; i < noteList.getCount(); ++i) {
+//                View v = noteList.getChildAt(i);
+//                CheckBox cb = (CheckBox) v.findViewById(R.id.checkbox);
+//                if (cb.isChecked()) {
+//                    someChecked = true;
+//                    deleteList.add(i);
+//                } else {
+//                    deleteList.remove(i);
+//                }
+//            }
+//        }
 //        if (someChecked) {
 //            findViewById(R.id.delete).setVisibility(View.VISIBLE);
 //        } else {
@@ -140,9 +141,7 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
                 return true;
             case R.id.delete:
-                if (deleteList.size() > 0) {
-                    deleteItems();
-                }
+                deleteItems();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);

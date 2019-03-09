@@ -27,6 +27,7 @@ public class NoteAdapter extends CursorAdapter {
         // Find fields to populate in inflated template
         ImageView noteImage = view.findViewById(R.id.noteImage);
         TextView noteText = view.findViewById(R.id.noteText);
+        TextView noteCategory = view.findViewById(R.id.noteCategory);
 
         // Get the image from the database as a Bitmap
         String path = cursor.getString(cursor.getColumnIndexOrThrow("noteImage"));
@@ -42,5 +43,6 @@ public class NoteAdapter extends CursorAdapter {
         // Populate fields with properties from database
         noteImage.setImageBitmap(bitmap);
         noteText.setText(title);
+        noteCategory.setText(category);
     }
 }
