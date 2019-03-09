@@ -24,10 +24,10 @@ public class NoteTakingDatabase extends SQLiteOpenHelper {
         db.execSQL("CREATE TABLE notes(_id INTEGER PRIMARY KEY, noteImage TEXT, noteText TEXT, noteDescription TEXT, noteCategory TEXT)");
     }
 
-    void storeNote(SQLiteDatabase db, String path, String text, String description, String category) {
+    void storeNote(SQLiteDatabase db, String path, String title, String description, String category) {
         ContentValues values = new ContentValues();
         values.put("noteImage", path);
-        values.put("noteText", text);
+        values.put("noteText", title);
         values.put("noteDescription", description);
         values.put("noteCategory", category);
 
@@ -44,8 +44,8 @@ public class NoteTakingDatabase extends SQLiteOpenHelper {
         db.update(DATABASE_NAME, values, "_id=?", new String[]{String.valueOf(id)});
     }
 
-    void deleteNote(SQLiteDatabase db, Integer id) {
-        this.getWritableDatabase().delete(DATABASE_NAME, "_id=?", new String[]{String.valueOf(id)});
+    void deleteNote(SQLiteDatabase db, String title) {
+        this.getWritableDatabase().delete(DATABASE_NAME, "noteText=?", new String[]{title});
     }
 
     // This method will simply replace the database if it's out of date.

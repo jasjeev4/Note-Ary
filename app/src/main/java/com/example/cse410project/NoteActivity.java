@@ -10,6 +10,7 @@ import android.graphics.BitmapFactory;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -25,6 +26,7 @@ public class NoteActivity extends AppCompatActivity {
     String imagePath = "";
     Button saveNote;
     TextView noteTitle;
+    TextView noteContents;
     ImageView noteImage;
 
     SQLiteDatabase db;
@@ -44,6 +46,7 @@ public class NoteActivity extends AppCompatActivity {
         saveNote = (Button) findViewById(R.id.create_note);
         noteTitle = (TextView) findViewById(R.id.note_title);
         noteImage = (ImageView) findViewById(R.id.note_image);
+        noteContents = (TextView) findViewById(R.id.note_contents);
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
             isUpdate = true;
@@ -54,9 +57,9 @@ public class NoteActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (!isUpdate) {
-                    storeNote(imagePath, noteTitle.getText().toString(), "Description", "Category");
+                    storeNote(imagePath, noteTitle.getText().toString(), noteContents.getText().toString(), "Category");
                 } else {
-                    updateNote(noteId, imagePath, noteTitle.getText().toString(), "Description", "Category");
+                    updateNote(noteId, imagePath, noteTitle.getText().toString(), noteContents.getText().toString(), "Category");
                 }
                 finish();
             }
@@ -111,8 +114,11 @@ public class NoteActivity extends AppCompatActivity {
         // Get the note text from the database as a String
         String noteText = cursor.getString(cursor.getColumnIndexOrThrow("noteText"));
         noteTitle.setText(noteText);
+        Log.d("fff","yy");
+        String contents = cursor.getString(cursor.getColumnIndexOrThrow("noteDescription"));
+        noteContents.setText(contents);
 
-        String noteDescription = cursor.getString(cursor.getColumnIndexOrThrow("noteDescription"));
+//        String noteDescription = cursor.getString(cursor.getColumnIndexOrThrow("noteDescription"));
         String noteCategory = cursor.getString(cursor.getColumnIndexOrThrow("noteCategory"));
 
         cursor.close();

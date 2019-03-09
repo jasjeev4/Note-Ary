@@ -10,27 +10,40 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.CheckBox;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
+
+import java.util.HashSet;
 
 public class MainActivity extends AppCompatActivity {
 
     Cursor todoCursor;
     ListView noteList;
     NoteAdapter adapter;
+    HashSet<Integer> deleteList = new HashSet<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+
         setContentView(R.layout.activity_main);
         noteList = (ListView) findViewById(R.id.note_list);
         noteList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Log.d("ID", "ID HERERR"+id);
                 Intent openNote = new Intent(MainActivity.this, NoteActivity.class);
                 openNote.putExtra("noteId", id);
                 startActivity(openNote);
@@ -44,6 +57,35 @@ public class MainActivity extends AppCompatActivity {
                     0);
         }
 
+    }
+
+    @Override
+    public boolean dispatchTouchEvent(MotionEvent event) {
+        super.dispatchTouchEvent(event);
+        if (event.getAction() != MotionEvent.ACTION_UP && event.getAction() != MotionEvent.ACTION_DOWN) {
+            return true;
+        }
+        super.onTouchEvent(event);
+        Log.d("F","PISSS");
+        boolean someChecked = false;
+        if (noteList != null) {
+            for (int i = 0; i < noteList.getCount(); ++i) {
+                View v = noteList.getChildAt(i);
+                CheckBox cb = (CheckBox) v.findViewById(R.id.checkbox);
+                if (cb.isChecked()) {
+                    someChecked = true;
+                    deleteList.add(i);
+                } else {
+                    deleteList.remove(i);
+                }
+            }
+        }
+        if (someChecked) {
+            findViewById(R.id.delete).setVisibility(View.VISIBLE);
+        } else {
+            findViewById(R.id.delete).setVisibility(View.INVISIBLE);
+        }
+        return true;
     }
 
     @Override
@@ -97,8 +139,27 @@ public class MainActivity extends AppCompatActivity {
                 Intent intent = new Intent(MainActivity.this, NoteActivity.class);
                 startActivity(intent);
                 return true;
+            case R.id.delete:
+                if (deleteList.size() > 0) {
+                    deleteItems();
+                }
             default:
                 return super.onOptionsItemSelected(item);
+        }
+    }
+
+    private void deleteItems() {
+        NoteTakingDatabase handler = new NoteTakingDatabase(getApplicationContext());
+        SQLiteDatabase db = handler.getWritableDatabase();
+        if (noteList != null) {
+            for (int i = 0; i < noteList.getCount(); ++i) {
+                View v = noteList.getChildAt(i);
+                CheckBox cb = (CheckBox) v.findViewById(R.id.checkbox);
+                if (cb.isChecked()) {
+                    TextView tv = (TextView) v.findViewById(R.id.noteText);
+                    handler.deleteNote(db, tv.getText().toString());
+                }
+            }
         }
     }
 
