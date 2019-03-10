@@ -2,8 +2,7 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".MainActivity"
-    android:id="@+id/entire_view">
+    tools:context=".MainActivity">
     <item
         android:id="@+id/delete"
         android:title="delete"
@@ -11,6 +10,14 @@
     <item
         android:id="@+id/add_note"
         android:title="Add Note"
+        app:showAsAction="ifRoom" />
+    <item
+        android:id="@+id/categories"
+        android:title="Categories"
+        app:showAsAction="ifRoom" />
+    <item
+        android:id="@+id/add_category"
+        android:title="Add Category"
         app:showAsAction="ifRoom" />
     <!--add image here using android:icon later-->
 </menu>
