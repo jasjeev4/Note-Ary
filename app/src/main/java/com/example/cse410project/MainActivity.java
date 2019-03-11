@@ -120,6 +120,13 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    @Override
+    public void onResume(){
+        super.onResume();
+        // put your code here...
+        loadNotesFromDatabase();
+    }
+
     public void loadNotesFromDatabase() {
         // Create a new instance of the NoteTakingDatabase
         NoteTakingDatabase handler = new NoteTakingDatabase(getApplicationContext());
