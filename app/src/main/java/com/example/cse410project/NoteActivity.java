@@ -1,12 +1,14 @@
 package com.example.cse410project;
 
 import android.Manifest;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.support.design.widget.Snackbar;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -17,6 +19,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.io.File;
 
@@ -59,12 +62,28 @@ public class NoteActivity extends AppCompatActivity {
         saveNote.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (!isUpdate) {
-                    storeNote(imagePath, noteTitle.getText().toString(), noteContents.getText().toString(), categoriesSpinner.getSelectedItem().toString());
-                } else {
-                    updateNote(noteId, imagePath, noteTitle.getText().toString(), noteContents.getText().toString(), categoriesSpinner.getSelectedItem().toString());
+                //handle a blank note
+                if(noteTitle.getText().toString().equals("") || noteContents.getText().toString().equals("")) {
+                    //send a message
+                    View constraintView = findViewById(R.id.constraintLayout);
+
+                    //Snackbar snackbar = Snackbar.make(constraintView,"Note cannot be blank!",Snackbar.LENGTH_SHORT);
+
+                    Context context = getApplicationContext();
+                    CharSequence text = "Note cannot be blank!";
+                    int duration = Toast.LENGTH_SHORT;
+
+                    Toast toast = Toast.makeText(context, text, duration);
+                    toast.show();
                 }
-                finish();
+                else {
+                    if (!isUpdate) {
+                        storeNote(imagePath, noteTitle.getText().toString(), noteContents.getText().toString(), categoriesSpinner.getSelectedItem().toString());
+                    } else {
+                        updateNote(noteId, imagePath, noteTitle.getText().toString(), noteContents.getText().toString(), categoriesSpinner.getSelectedItem().toString());
+                    }
+                    finish();
+                }
             }
         });
         noteImage.setOnClickListener(new View.OnClickListener() {
