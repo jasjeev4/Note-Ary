@@ -5,7 +5,8 @@
     android:layout_height="match_parent"
     android:layout_marginEnd="8dp"
     android:layout_marginStart="8dp"
-    android:layout_marginTop="8dp">
+    android:layout_marginTop="8dp"
+    android:id="@+id/constraintLayout">
 
     <ImageView
         android:id="@+id/note_image"
