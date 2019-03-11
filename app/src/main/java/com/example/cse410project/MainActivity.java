@@ -34,7 +34,9 @@ public class MainActivity extends AppCompatActivity {
     ListView noteList;
     NoteAdapter adapter;
     HashSet<Integer> deleteList = new HashSet<>();
+    String viewingCategory = "";
     public static String[] categories = { "General", "To Do" };
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -140,6 +142,7 @@ public class MainActivity extends AppCompatActivity {
 
         // Set the NoteAdapter to the ListView (display all notes from DB)
         noteList.setAdapter(adapter);
+        viewingCategory = "";
     }
 
     public  void loadNotesFromCategory(String category) {
@@ -151,6 +154,7 @@ public class MainActivity extends AppCompatActivity {
         adapter = new NoteAdapter(this, todoCursor, 0);
 
         noteList.setAdapter(adapter);
+        viewingCategory = category;
     }
 
     @Override
@@ -162,6 +166,11 @@ public class MainActivity extends AppCompatActivity {
                 return true;
             case R.id.delete:
                 deleteItems();
+                if (viewingCategory.equals(""))  {
+                    loadNotesFromDatabase();
+                } else {
+                    loadNotesFromCategory(viewingCategory);
+                }
                 return true;
             case R.id.categories:
                 categoryDialog();
