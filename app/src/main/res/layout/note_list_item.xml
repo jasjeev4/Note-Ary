@@ -4,7 +4,9 @@
     android:layout_height="match_parent"
     android:orientation="horizontal"
     android:descendantFocusability="blocksDescendants"
-    android:padding="16dp">
+    android:padding="16dp"
+    android:background="@color/paleGreenColor"
+    >
 
     <ImageView
         android:id="@+id/noteImage"
