@@ -12,6 +12,7 @@ import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.InputType;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -22,10 +23,12 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 
 public class MainActivity extends AppCompatActivity {
@@ -35,7 +38,7 @@ public class MainActivity extends AppCompatActivity {
     NoteAdapter adapter;
     HashSet<Integer> deleteList = new HashSet<>();
     String viewingCategory = "";
-    public static String[] categories = { "General", "To Do" };
+    public static ArrayList<String> categories = new ArrayList<String>() {};
 
 
     @Override
@@ -56,6 +59,8 @@ public class MainActivity extends AppCompatActivity {
         });
         if(userHasPermission()) {
             loadNotesFromDatabase();
+
+            loadCategories();
         }  else {
             ActivityCompat.requestPermissions(MainActivity.this,
                     new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},
@@ -157,6 +162,20 @@ public class MainActivity extends AppCompatActivity {
         viewingCategory = category;
     }
 
+    public void loadCategories() {
+        CategoryDatabase handler = new CategoryDatabase(getApplicationContext());
+
+        SQLiteDatabase db = handler.getWritableDatabase();
+        todoCursor = db.rawQuery("SELECT * FROM categories", null);
+        categories.clear();
+        if  (todoCursor.getCount() != 0) {
+            while (todoCursor.moveToNext()) {
+                Log.d("CATS:", todoCursor.getString(1));
+                categories.add(todoCursor.getString(1));
+            }
+        }
+    }
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
@@ -174,17 +193,54 @@ public class MainActivity extends AppCompatActivity {
                 return true;
             case R.id.categories:
                 categoryDialog();
+                return true;
+            case R.id.add_category:
+                addCategoryDialog();
+                return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
     }
 
+    private void addCategoryDialog() {
+        AlertDialog.Builder b = new AlertDialog.Builder(this);
+        b.setTitle("Add Category");
+        final EditText input = new EditText(this);
+        input.setInputType(InputType.TYPE_CLASS_TEXT);
+        b.setView(input);
+        b.setPositiveButton("Add", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                if (!categories.contains(input.getText().toString())) {
+                    storeCategory(input.getText().toString());
+                    categories.add(input.getText().toString());
+                }
+            }
+        });
+        b.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.cancel();
+            }
+        });
+        b.show();
+    }
+
+    private void storeCategory(String category) {
+        // Create a new instance of the NoteTakingDatabase
+        CategoryDatabase handler = new CategoryDatabase(getApplicationContext());
+        // Get the writable database
+        SQLiteDatabase db = handler.getWritableDatabase();
+        // Store the note in the database
+        handler.storeCategory(db, category);
+    }
+
     private void categoryDialog() {
         AlertDialog.Builder b = new AlertDialog.Builder(this);
         b.setTitle("Choose Category");
-        String[] allCategories = new String[this.categories.length + 1];
-        for (int i = 0; i < this.categories.length; ++i){
-            allCategories[i] = this.categories[i];
+        String[] allCategories = new String[this.categories.size() + 1];
+        for (int i = 0; i < this.categories.size(); ++i){
+            allCategories[i] = this.categories.get(i);
         }
         allCategories[allCategories.length-1] = "All Notes";
         b.setItems(allCategories, new DialogInterface.OnClickListener() {
@@ -192,12 +248,12 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(DialogInterface dialog, int which) {
 
-                if (which == MainActivity.categories.length) {
+                if (which == MainActivity.categories.size()) {
                     dialog.dismiss();
                     loadNotesFromDatabase();
                 } else {
                     dialog.dismiss();
-                    loadNotesFromCategory(MainActivity.categories[which]);
+                    loadNotesFromCategory(MainActivity.categories.get(which));
                 }
 
             }
