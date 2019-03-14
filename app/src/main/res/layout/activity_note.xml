@@ -63,11 +63,12 @@
         style="?android:textAppearanceSmall"
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
-        android:background="@color/successColor"
+        android:background="@color/colorPrimary"
         android:layout_marginTop="20dp"
         android:paddingLeft="10dp"
         android:paddingRight="10dp"
         android:layout_marginBottom="10dp"
         android:textStyle="bold"
+        android:textColor="@color/white"
         />
 </android.support.constraint.ConstraintLayout>

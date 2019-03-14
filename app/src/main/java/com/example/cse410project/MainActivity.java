@@ -142,6 +142,16 @@ public class MainActivity extends AppCompatActivity {
         //Get all notes from the database
         todoCursor = db.rawQuery("SELECT * FROM notes", null);
 
+        TextView empty;
+        empty = (TextView) findViewById(R.id.empty_list);
+
+        if(todoCursor!=null && todoCursor.getCount()==0) {
+            empty.setVisibility(View.VISIBLE);
+        }
+        else {
+            empty.setVisibility(View.GONE);
+        }
+
         // Create an instance of the NoteAdapter with our cursor
         adapter = new NoteAdapter(this, todoCursor, 0);
 
