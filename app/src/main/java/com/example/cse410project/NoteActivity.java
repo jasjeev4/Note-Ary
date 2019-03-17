@@ -26,6 +26,8 @@ import java.io.File;
 import pl.aprilapps.easyphotopicker.DefaultCallback;
 import pl.aprilapps.easyphotopicker.EasyImage;
 
+import java.util.Date;
+
 public class NoteActivity extends AppCompatActivity {
 
     String imagePath = "";
@@ -34,7 +36,7 @@ public class NoteActivity extends AppCompatActivity {
     TextView noteContents;
     ImageView noteImage;
     Spinner categoriesSpinner;
-
+    TextView noteDate;
     SQLiteDatabase db;
 
     boolean isUpdate = false;
@@ -53,12 +55,20 @@ public class NoteActivity extends AppCompatActivity {
         noteTitle = (TextView) findViewById(R.id.note_title);
         noteImage = (ImageView) findViewById(R.id.note_image);
         noteContents = (TextView) findViewById(R.id.note_contents);
+        noteDate = (TextView) findViewById(R.id.note_date);
+
+        Date mydate = new Date();
+        String thedate = mydate.toString();
+        noteDate.setText(thedate);
+
+
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
             isUpdate = true;
             noteId = (int) extras.getLong("noteId");
             setNote(noteId);
         }
+
         saveNote.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -78,7 +88,9 @@ public class NoteActivity extends AppCompatActivity {
                 }
                 else {
                     if (!isUpdate) {
-                        storeNote(imagePath, noteTitle.getText().toString(), noteContents.getText().toString(), categoriesSpinner.getSelectedItem().toString());
+                        storeNote(imagePath, noteTitle.getText().toString(), noteContents.getText().toString(), categoriesSpinner.getSelectedItem().toString(),noteDate.getText().toString());
+
+                        Log.d("dateeee",(noteDate.getText().toString()).getClass().getName());
                     } else {
                         updateNote(noteId, imagePath, noteTitle.getText().toString(), noteContents.getText().toString(), categoriesSpinner.getSelectedItem().toString());
                     }
@@ -128,6 +140,7 @@ public class NoteActivity extends AppCompatActivity {
         SQLiteDatabase db = handler.getWritableDatabase();
         // Store the note in the database
         handler.updateNote(db, noteId, imagePath, title, description, category);
+        db.close();
     }
 
     private void setNote(Integer noteId) {
@@ -150,15 +163,20 @@ public class NoteActivity extends AppCompatActivity {
 //        String noteDescription = cursor.getString(cursor.getColumnIndexOrThrow("noteDescription"));
         String noteCategory = cursor.getString(cursor.getColumnIndexOrThrow("noteCategory"));
 
+        String noteDatee = cursor.getString(cursor.getColumnIndexOrThrow("noteDate"));
+        noteDate.setText(noteDatee);
+
+
         cursor.close();
     }
 
-    public void storeNote(String path, String title, String description, String category) {
+    public void storeNote(String path, String title, String description, String category, String date) {
         // Create a new instance of the NoteTakingDatabase
         NoteTakingDatabase handler = new NoteTakingDatabase(getApplicationContext());
         // Get the writable database
         SQLiteDatabase db = handler.getWritableDatabase();
         // Store the note in the database
-        handler.storeNote(db, path, title, description, category);
+        handler.storeNote(db, path, title, description, category, date);
+        db.close();
     }
 }

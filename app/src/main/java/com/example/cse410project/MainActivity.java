@@ -189,6 +189,15 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
+            case R.id.sort_by_category:
+                sortbycategory();
+                return true;
+            case R.id.sort_by_title:
+                sortbytitle();
+                return true;
+            case R.id.sort_by_date:
+                sortbydate();
+                return true;
             case R.id.add_note:
                 Intent intent = new Intent(MainActivity.this, NoteActivity.class);
                 startActivity(intent);
@@ -273,6 +282,79 @@ public class MainActivity extends AppCompatActivity {
         b.show();
     }
 
+    public void sortbytitle(){
+        // Create a new instance of the NoteTakingDatabase
+        NoteTakingDatabase handler = new NoteTakingDatabase(getApplicationContext());
+        // Get the writable database
+        SQLiteDatabase db = handler.getWritableDatabase();
+        //Get all notes from the database
+        todoCursor = db.rawQuery("SELECT * FROM notes ORDER BY noteText", null);
+        TextView empty;
+        empty = (TextView) findViewById(R.id.empty_list);
+
+        if(todoCursor!=null && todoCursor.getCount()==0) {
+            empty.setVisibility(View.VISIBLE);
+        }
+        else {
+            empty.setVisibility(View.GONE);
+        }
+
+        // Create an instance of the NoteAdapter with our cursor
+        adapter = new NoteAdapter(this, todoCursor, 0);
+
+        // Set the NoteAdapter to the ListView (display all notes from DB)
+        noteList.setAdapter(adapter);
+        viewingCategory = "";
+    }
+
+    public void sortbydate(){
+        // Create a new instance of the NoteTakingDatabase
+        NoteTakingDatabase handler = new NoteTakingDatabase(getApplicationContext());
+        // Get the writable database
+        SQLiteDatabase db = handler.getWritableDatabase();
+        //Get all notes from the database
+        todoCursor = db.rawQuery("SELECT * FROM notes ORDER BY noteDate DESC", null);
+        TextView empty;
+        empty = (TextView) findViewById(R.id.empty_list);
+
+        if(todoCursor!=null && todoCursor.getCount()==0) {
+            empty.setVisibility(View.VISIBLE);
+        }
+        else {
+            empty.setVisibility(View.GONE);
+        }
+
+        // Create an instance of the NoteAdapter with our cursor
+        adapter = new NoteAdapter(this, todoCursor, 0);
+
+        // Set the NoteAdapter to the ListView (display all notes from DB)
+        noteList.setAdapter(adapter);
+        viewingCategory = "";
+    }
+    public void sortbycategory(){
+        // Create a new instance of the NoteTakingDatabase
+        NoteTakingDatabase handler = new NoteTakingDatabase(getApplicationContext());
+        // Get the writable database
+        SQLiteDatabase db = handler.getWritableDatabase();
+        //Get all notes from the database
+        todoCursor = db.rawQuery("SELECT * FROM notes ORDER BY noteCategory", null);
+        TextView empty;
+        empty = (TextView) findViewById(R.id.empty_list);
+
+        if(todoCursor!=null && todoCursor.getCount()==0) {
+            empty.setVisibility(View.VISIBLE);
+        }
+        else {
+            empty.setVisibility(View.GONE);
+        }
+
+        // Create an instance of the NoteAdapter with our cursor
+        adapter = new NoteAdapter(this, todoCursor, 0);
+
+        // Set the NoteAdapter to the ListView (display all notes from DB)
+        noteList.setAdapter(adapter);
+        viewingCategory = "";
+    }
     private void deleteItems() {
         NoteTakingDatabase handler = new NoteTakingDatabase(getApplicationContext());
         SQLiteDatabase db = handler.getWritableDatabase();

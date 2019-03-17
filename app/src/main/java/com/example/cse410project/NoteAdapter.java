@@ -28,6 +28,7 @@ public class NoteAdapter extends CursorAdapter {
         ImageView noteImage = view.findViewById(R.id.noteImage);
         TextView noteText = view.findViewById(R.id.noteText);
         TextView noteCategory = view.findViewById(R.id.noteCategory);
+        TextView noteDate = view.findViewById(R.id.noteDate);
 
         // Get the image from the database as a Bitmap
         String path = cursor.getString(cursor.getColumnIndexOrThrow("noteImage"));
@@ -40,9 +41,12 @@ public class NoteAdapter extends CursorAdapter {
 
         String category = cursor.getString(cursor.getColumnIndexOrThrow("noteCategory"));
 
+        String date = cursor.getString(cursor.getColumnIndexOrThrow("noteDate"));
+
         // Populate fields with properties from database
         noteImage.setImageBitmap(bitmap);
         noteText.setText(title);
         noteCategory.setText(category);
+        noteDate.setText(date);
     }
 }

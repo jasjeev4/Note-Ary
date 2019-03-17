@@ -19,5 +19,21 @@
         android:id="@+id/add_category"
         android:title="Add Category"
         app:showAsAction="ifRoom" />
+    <item
+        android:id="@+id/sort_by_title"
+        android:title="Sort by Title"
+        app:showAsAction="ifRoom" />
+        <!--app:actionProviderClass="android.support.v7.app.MediaRouteActionProvider"-->
+        <!--tools:icon="@drawable/mr_button_light" />-->
+    <item
+        android:id="@+id/sort_by_date"
+        android:title="Sort by Date"
+        app:showAsAction="ifRoom" />
+    <item
+        android:id="@+id/sort_by_category"
+        android:title="Sort by category"
+        app:showAsAction="ifRoom" />
+        <!--app:actionProviderClass="android.support.v7.app.MediaRouteActionProvider"-->
+        <!--tools:icon="@drawable/mr_button_light" />-->
     <!--add image here using android:icon later-->
 </menu>
