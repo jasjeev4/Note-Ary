@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_marginEnd="8dp"
@@ -21,10 +22,9 @@
 
     <EditText
         android:id="@+id/note_title"
-        android:layout_width="282dp"
+        android:layout_width="213dp"
         android:layout_height="wrap_content"
         android:hint="Note Title"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/note_image"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -32,9 +32,10 @@
         android:id="@+id/category_spinner"
         android:layout_width="282dp"
         android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/note_image"
-        app:layout_constraintTop_toBottomOf="@+id/note_title"/>
+        app:layout_constraintTop_toBottomOf="@+id/note_title" />
 
     <EditText
         android:id="@+id/note_contents"
@@ -71,4 +72,16 @@
         android:textStyle="bold"
         android:textColor="@color/white"
         />
+
+    <TextView
+        android:id="@+id/note_date"
+        android:layout_width="91dp"
+        android:layout_height="50dp"
+        android:layout_marginEnd="14dp"
+        android:layout_marginRight="14dp"
+        android:text="TextView"
+        app:layout_constraintBottom_toTopOf="@+id/category_spinner"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/note_title"
+        app:layout_constraintTop_toTopOf="parent" />
 </android.support.constraint.ConstraintLayout>

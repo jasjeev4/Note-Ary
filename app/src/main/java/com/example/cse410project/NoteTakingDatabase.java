@@ -14,24 +14,26 @@ public class NoteTakingDatabase extends SQLiteOpenHelper {
     private String DATABASE_NAME = "notes";
 
     NoteTakingDatabase(Context context) {
-        super(context, "NOTES_DATABASE", null, 3);
+        super(context, "NOTES_DATABASE", null, 4);
     }
 
     // This is where we need to write create table statements.
     // This is called when database is created.
     @Override
     public void onCreate(SQLiteDatabase db) {
-        db.execSQL("CREATE TABLE notes(_id INTEGER PRIMARY KEY, noteImage TEXT, noteText TEXT, noteDescription TEXT, noteCategory TEXT)");
+        db.execSQL("CREATE TABLE notes(_id INTEGER PRIMARY KEY, noteDate TEXT, noteImage TEXT, noteText TEXT, noteDescription TEXT, noteCategory TEXT)");
     }
 
-    void storeNote(SQLiteDatabase db, String path, String title, String description, String category) {
+    void storeNote(SQLiteDatabase db, String path, String title, String description, String category, String date) {
         ContentValues values = new ContentValues();
         values.put("noteImage", path);
         values.put("noteText", title);
         values.put("noteDescription", description);
         values.put("noteCategory", category);
+        values.put("noteDate", date);
 
         db.insert(DATABASE_NAME, null, values);
+        db.close();
     }
 
     void updateNote(SQLiteDatabase db, Integer id, String path, String text, String description, String category) {
@@ -42,6 +44,7 @@ public class NoteTakingDatabase extends SQLiteOpenHelper {
         values.put("noteCategory", category);
 
         db.update(DATABASE_NAME, values, "_id=?", new String[]{String.valueOf(id)});
+        db.close();
     }
 
     void deleteNote(SQLiteDatabase db, String title) {
