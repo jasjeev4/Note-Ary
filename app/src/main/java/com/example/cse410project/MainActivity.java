@@ -6,9 +6,11 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -20,6 +22,7 @@ import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
@@ -36,6 +39,7 @@ public class MainActivity extends AppCompatActivity {
     Cursor todoCursor;
     ListView noteList;
     NoteAdapter adapter;
+    SwipeRefreshLayout swipeView;
     HashSet<Integer> deleteList = new HashSet<>();
     String viewingCategory = "";
     public static ArrayList<String> categories = new ArrayList<String>() {};
@@ -66,7 +70,36 @@ public class MainActivity extends AppCompatActivity {
                     new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},
                     0);
         }
+        //Adapted from source: https://www.survivingwithandroid.com/2014/05/android-swiperefreshlayout-tutorial-2.html
+        swipeView = (SwipeRefreshLayout) findViewById(R.id.swiperefresh);
+        swipeView.setEnabled(false);
+        swipeView.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                swipeView.setRefreshing(true);
+                ( new Handler()).postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        swipeView.setRefreshing(false);
+                    }
+                }, 3000);
+            }
+        });
+        noteList.setOnScrollListener(new AbsListView.OnScrollListener() {
+            @Override
+            public void onScrollStateChanged(AbsListView absListView, int i) {
+            }
 
+            @Override
+            public void onScroll(AbsListView absListView, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
+                if (firstVisibleItem == 0) {
+                    swipeView.setEnabled(true);
+                }
+                else {
+                    swipeView.setEnabled(false);
+                }
+            }
+        });
     }
 
     @Override
