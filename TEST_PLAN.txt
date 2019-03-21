@@ -1,21 +1,81 @@
 TEST PLAN
 	This test is for sorting notes by title
-      1.Click “Kebab” menu on home page
-      2.Click “Sort by Title” option
-      3.Entries automatically become sorted by descending title [A-Za-z]
+	      1.Click “Kebab” menu on home page
+	      2.Click “Sort by Title” option
+	      3.Entries automatically become sorted by descending title [A-Za-z]
 
 	This test is for sorting notes by date
-      1.Click “Kebab” menu on home page
-      2.Click “Sort by Date” option
-      3.Entries automatically become sorted by most recent entry to least recent
+	      1.Click “Kebab” menu on home page
+	      2.Click “Sort by Date” option
+	      3.Entries automatically become sorted by most recent entry to least recent
 
 	This test is for sorting notes by category
-      1.Click “Kebab” menu on home page
-      2.Click “Sort by Category” option
-      3.Entries automatically become sorted by descending categories [A-Za-z]
+	      1.Click “Kebab” menu on home page
+	      2.Click “Sort by Category” option
+	      3.Entries automatically become sorted by descending categories [A-Za-z]
 
 	This test is for displaying notes by categories
-      1.Click “Kebab” menu on home page
-      2.Click “Categories”
-      3.Choose a category
-      4.Only notes under that category are now displayed
+	      1.Click “Kebab” menu on home page
+	      2.Click “Categories”
+	      3.Choose a category
+	      4.Only notes under that category are now displayed
+      
+      	This test is for deleting notes
+      	      1. Click check box on the right of any note in the main home page view
+	      2. Click DELETE button
+	      3. Highlighted notes are deleted and view is automatically updated
+	      
+	This test is for adding notes
+		1. Click "ADD NOTE" button
+		2. Click "CREATE NOTE" button
+		3. Pop up saying "Note cannot be blank!" appears
+		
+		1. Click "ADD NOTE" button
+		2. Fill in "Title" text
+		3. Click "CREATE NOTE" button
+		4. Pop up saying "Note cannot be blank!" appears
+		
+		1. Click "ADD NOTE" button
+		2. Fill in "Note it up..." text
+		3. Click "CREATE NOTE" button
+		4. Pop up saying "Note cannot be blank!" appears
+		
+		1. Click "ADD NOTE" button
+		2. Fill in "Title" text
+		2. Fill in "Note it up..." text
+		3. Click "CREATE NOTE" button	
+		4. View is redirected to home page with new note at the top of the list
+		
+	This test is for refreshing
+		1. Go to home page
+		2. Swipe down
+		3. Refresh widget pops up from top
+		
+	This test is for displaying text if the notebook is empty
+		1. Delete all existing notes or ensure that no notes exist in the main view
+		2. "Add a new note!" message should be displayed in the background
+		
+	This test is for checking the new name of our app
+		1. Install app
+		2. Find app in home page
+		3. Note app name should be "Note-ary"
+		
+	This test is for checking the color scheme of our app
+		1. Install app
+		2. Find and enter app
+		3. Header color should be dark green
+		4. Body color should be gray
+		
+	This test is for checking the icon of our app
+		1. Install app
+		2. Find app in home page
+		2. Icon should be a red notebook and a pencil
+		
+	This test is for categorizing entries
+		1. Click "ADD NOTE" button
+		2. Fill in title
+		3. Click the category drop down list as indicated by the pointing down arrow to the right
+		4. Choose a category
+		5. Fill in "Note it up..." text box
+		6. Click "CREATE NOTE" button
+		7. New note is added with category displayed under the title of the note in home page
