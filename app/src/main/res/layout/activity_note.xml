@@ -14,6 +14,7 @@
         android:layout_width="405dp"
         android:layout_height="328dp"
         android:background="@color/colorPrimary"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -34,18 +35,19 @@
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
         android:layout_marginTop="8dp"
-        android:layout_marginEnd="48dp"
-        android:layout_marginRight="48dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginBottom="8dp"
         app:layout_constraintBottom_toTopOf="@+id/note_contents"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.842"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/note_title" />
+        app:layout_constraintTop_toBottomOf="@+id/note_title"
+        app:layout_constraintVertical_bias="0.55" />
 
     <EditText
         android:id="@+id/note_contents"
-        android:layout_width="305dp"
-        android:layout_height="169dp"
+        android:layout_width="277dp"
+        android:layout_height="132dp"
         android:layout_marginStart="16dp"
         android:layout_marginLeft="16dp"
         android:layout_marginEnd="16dp"
@@ -81,7 +83,7 @@
     <TextView
         android:id="@+id/note_date"
         android:layout_width="91dp"
-        android:layout_height="50dp"
+        android:layout_height="61dp"
         android:layout_marginStart="44dp"
         android:layout_marginLeft="44dp"
         android:layout_marginEnd="8dp"
