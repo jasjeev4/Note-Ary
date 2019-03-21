@@ -1,29 +1,29 @@
-TEST PLAN
+﻿TEST PLAN
 	This test is for sorting notes by title
-	    1.Click “Kebab” menu on home page
-	    2.Click “Sort by Title” option
-	    3.Entries automatically become sorted by descending title [A-Za-z]
+		1.Click “Kebab” menu on home page
+		2.Click “Sort by Title” option
+		3.Entries automatically become sorted by descending title [A-Za-z]
 
 	This test is for sorting notes by date
-	    1.Click “Kebab” menu on home page
-	    2.Click “Sort by Date” option
-	    3.Entries automatically become sorted by most recent entry to least recent
+		1.Click “Kebab” menu on home page
+		2.Click “Sort by Date” option
+		3.Entries automatically become sorted by most recent entry to least recent
 
 	This test is for sorting notes by category
-        1.Click “Kebab” menu on home page
-        2.Click “Sort by Category” option
-        3.Entries automatically become sorted by descending categories [A-Za-z]
+		1.Click “Kebab” menu on home page
+		2.Click “Sort by Category” option
+		3.Entries automatically become sorted by descending categories [A-Za-z]
 
 	This test is for displaying notes by categories
-        1.Click “Kebab” menu on home page
-        2.Click “Categories”
-        3.Choose a category
-        4.Only notes under that category are now displayed
+		1.Click “Kebab” menu on home page
+		2.Click “Categories”
+		3.Choose a category
+		4.Only notes under that category are now displayed
       
-    This test is for deleting notes
-        1. Click check box on the right of any note in the main home page view
-        2. Click DELETE button
-        3. Highlighted notes are deleted and view is automatically updated
+	This test is for deleting notes
+		1. Click check box on the right of any note in the main home page view
+		2. Click DELETE button
+		3. Highlighted notes are deleted and view is automatically updated
 
 	This test is for adding notes
 		1. Click "ADD NOTE" button
@@ -47,16 +47,16 @@ TEST PLAN
 		4. View is redirected to home page with new note at the top of the list
 
 	This test is for editing notes
-    	1. Click on a note
-    	2. Edit "Note Title" text
-    	3. Click "CREATE NOTE" button
-    	4. View is redirected to home page and previously clicked note has a new title
+		1. Click on a note
+		2. Edit "Note Title" text
+		3. Click "CREATE NOTE" button
+		4. View is redirected to home page and previously clicked note has a new title
 
-    	1. Click on a note
-        2. Edit content text
-        3. Click "CREATE NOTE" button
-        4. View is redirected to home page, click the same note again
-        5. The note has the newly edited content field
+		1. Click on a note
+		2. Edit content text
+		3. Click "CREATE NOTE" button
+		4. View is redirected to home page, click the same note again
+		5. The note has the newly edited content field
 		
 	This test is for refreshing
 		1. Go to home page
@@ -66,7 +66,7 @@ TEST PLAN
 	This test is for displaying text if the notebook is empty
 		1. Delete all existing notes or ensure that no notes exist in the main view
 		2. "Add a new note!" message should be displayed in the background
-		
+
 	This test is for checking the new name of our app
 		1. Install app
 		2. Find app in home page
@@ -81,7 +81,7 @@ TEST PLAN
 	This test is for checking the icon of our app
 		1. Install app
 		2. Find app in home page
-		2. Icon should be a red notebook and a pencil
+		3. Icon should be a red notebook and a pencil
 		
 	This test is for categorizing entries
 		1. Click "ADD NOTE" button
@@ -93,20 +93,20 @@ TEST PLAN
 		7. New note is added with category displayed under the title of the note in home page
 
 	This test is for adding a picture to a note
-        1. Click on a note or create a new one
-        2. Click on the green box at the top of the screen, below the title of the app
-        3. Choose an upload option
-        4. Upload an image
-        5. The image should display in the green box
-        6. If you're creating a new note, fill in "Note Title" and "Note it up..." text
-        7. Click "CREATE NOTE" button
-        8. The image should display next to the note you just edited/created
+		1. Click on a note or create a new one
+		2. Click on the green box at the top of the screen, below the title of the app
+		3. Choose an upload option
+		4. Upload an image
+		5. The image should display in the green box
+		6. If you're creating a new note, fill in "Note Title" and "Note it up..." text
+		7. Click "CREATE NOTE" button
+		8. The image should display next to the note you just edited/created
 
-    This test is for editing a picture in a note
-        1. Click on a note with an image
-        2. Click on the image within the note
-        3. Choose an upload option
-        4. Upload a new image
-        5. The new image should display in the green box
-        6. Click "CREATE NOTE" button
-        7. The new image should display next to the note you just edited
+	This test is for editing a picture in a note
+		1. Click on a note with an image
+		2. Click on the image within the note
+		3. Choose an upload option
+		4. Upload a new image
+		5. The new image should display in the green box
+		6. Click "CREATE NOTE" button
+		7. The new image should display next to the note you just edited
