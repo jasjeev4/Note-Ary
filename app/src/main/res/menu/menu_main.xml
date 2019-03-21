@@ -31,7 +31,7 @@
         app:showAsAction="ifRoom" />
     <item
         android:id="@+id/sort_by_category"
-        android:title="Sort by category"
+        android:title="Sort by Category"
         app:showAsAction="ifRoom" />
         <!--app:actionProviderClass="android.support.v7.app.MediaRouteActionProvider"-->
         <!--tools:icon="@drawable/mr_button_light" />-->
