@@ -11,11 +11,8 @@
 
     <ImageView
         android:id="@+id/note_image"
-        android:layout_width="66dp"
-        android:layout_height="64dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
+        android:layout_width="405dp"
+        android:layout_height="328dp"
         android:background="@color/colorPrimary"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -24,34 +21,42 @@
         android:id="@+id/note_title"
         android:layout_width="213dp"
         android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
         android:hint="Note Title"
-        app:layout_constraintStart_toEndOf="@+id/note_image"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/note_image" />
 
     <Spinner
         android:id="@+id/category_spinner"
         android:layout_width="282dp"
         android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
         android:layout_marginTop="8dp"
+        android:layout_marginEnd="48dp"
+        android:layout_marginRight="48dp"
+        app:layout_constraintBottom_toTopOf="@+id/note_contents"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/note_image"
+        app:layout_constraintHorizontal_bias="0.842"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/note_title" />
 
     <EditText
         android:id="@+id/note_contents"
-        android:layout_width="380dp"
-        android:layout_height="585dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginRight="8dp"
+        android:layout_width="305dp"
+        android:layout_height="169dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginRight="16dp"
         android:background="@android:color/transparent"
+        android:gravity="top"
         android:hint="Note it up..."
         android:minLines="8"
-        android:gravity="top"
+        app:layout_constraintBottom_toTopOf="@+id/create_note"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/note_image"
-        app:layout_constraintTop_toBottomOf="@+id/note_image" />
+        app:layout_constraintStart_toStartOf="parent" />
 
     <Button
         android:id="@+id/create_note"
@@ -77,11 +82,12 @@
         android:id="@+id/note_date"
         android:layout_width="91dp"
         android:layout_height="50dp"
-        android:layout_marginEnd="14dp"
-        android:layout_marginRight="14dp"
+        android:layout_marginStart="44dp"
+        android:layout_marginLeft="44dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
         android:text="TextView"
-        app:layout_constraintBottom_toTopOf="@+id/category_spinner"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/note_title"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/note_image" />
 </android.support.constraint.ConstraintLayout>
