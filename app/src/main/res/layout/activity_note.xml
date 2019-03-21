@@ -30,7 +30,7 @@
 
     <Spinner
         android:id="@+id/category_spinner"
-        android:layout_width="374dp"
+        android:layout_width="213dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
@@ -89,12 +89,10 @@
         android:id="@+id/note_date"
         android:layout_width="91dp"
         android:layout_height="61dp"
-        android:layout_marginStart="44dp"
-        android:layout_marginLeft="44dp"
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
         android:text="TextView"
-        app:layout_constraintEnd_toEndOf="@+id/category_spinner"
-        app:layout_constraintStart_toEndOf="@+id/note_title"
+
+        app:layout_constraintEnd_toEndOf="@id/note_image"
         app:layout_constraintTop_toBottomOf="@+id/note_image" />
 </android.support.constraint.ConstraintLayout>
