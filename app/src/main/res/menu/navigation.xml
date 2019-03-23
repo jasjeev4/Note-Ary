@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/navigation_title"
+        android:icon="@drawable/ic_action_baseline_view_agenda_24px"
+        android:title="Title" />
+
+    <item
+        android:id="@+id/navigation_date"
+        android:icon="@drawable/ic_action_baseline_today_24px"
+        android:title="Date" />
+
+    <item
+        android:id="@+id/navigation_category"
+        android:icon="@drawable/ic_action_baseline_category_24px"
+        android:title="Category" />
+
+</menu>

@@ -8,6 +8,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Handler;
 import android.support.annotation.NonNull;
+import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -43,6 +44,8 @@ public class MainActivity extends AppCompatActivity {
     HashSet<Integer> deleteList = new HashSet<>();
     String viewingCategory = "";
     public static ArrayList<String> categories = new ArrayList<String>() {};
+    BottomNavigationView bottomNavigationView;
+
 
 
     @Override
@@ -100,6 +103,28 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
+
+        bottomNavigationView =  (BottomNavigationView) findViewById(R.id.navigation);
+
+        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                switch(item.getItemId()) {
+                    case R.id.navigation_title:
+                        sortbytitle();
+                        return true;
+                    case R.id.navigation_category:
+                        sortbycategory();
+                        return true;
+                    case R.id.navigation_date:
+                        sortbydate();
+                        return true;
+                    default:
+                        return true;
+                }
+            }
+        });
+
     }
 
     @Override

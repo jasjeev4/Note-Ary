@@ -17,7 +17,6 @@ public class CategoryDatabase extends SQLiteOpenHelper {
         db.execSQL("CREATE TABLE categories(_id INTEGER PRIMARY KEY, category TEXT)");
         storeCategory(db, "General");
         storeCategory(db, "To Do");
-        db.close();
     }
 
     @Override
@@ -33,6 +32,5 @@ public class CategoryDatabase extends SQLiteOpenHelper {
         ContentValues values = new ContentValues();
         values.put("category", category);
         db.insert(DATABASE_NAME, null, values);
-        db.close();
     }
 }
