@@ -257,6 +257,7 @@ public class MainActivity extends AppCompatActivity {
                 sortbydate();
                 return true;
             case R.id.add_note:
+                loadCategories();
                 Intent intent = new Intent(MainActivity.this, NoteActivity.class);
                 startActivity(intent);
                 return true;
